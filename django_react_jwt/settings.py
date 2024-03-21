@@ -13,6 +13,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:8080",
+    "http://127.0.0.1:3000",
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 INSTALLED_APPS = [
@@ -26,6 +32,7 @@ INSTALLED_APPS = [
     # third party apps
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
+    'corsheaders',
     
     # internal apps
     'base.apps.BaseConfig',
@@ -82,6 +89,7 @@ SIMPLE_JWT = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
