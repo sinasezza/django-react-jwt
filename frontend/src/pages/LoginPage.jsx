@@ -1,6 +1,10 @@
 import React from "react";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
 
 const LoginPage = () => {
+  let { loginUser } = useContext(AuthContext);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -9,7 +13,7 @@ const LoginPage = () => {
             Sign in to your account
           </h2>
         </div>
-        <form className="mt-8 space-y-6" method="POST">
+        <form className="mt-8 space-y-6" method="POST" onSubmit={loginUser}>
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
