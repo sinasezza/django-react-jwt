@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const Header = () => {
-  let { user } = useContext(AuthContext);
+  let {user, logoutUser } = useContext(AuthContext);
 
   return (
     <header className="bg-gray-800 py-4">
@@ -18,7 +18,12 @@ const Header = () => {
           </Link>
           
           {user ? (
-            <span className="text-white hover:text-gray-300 font-semibold cursor-pointer">Logout</span>
+            <span 
+              className="text-white hover:text-gray-300 font-semibold cursor-pointer"
+              onClick={logoutUser}
+              >
+                Logout
+              </span>
           ) : (
             <Link
               to="/login/"
