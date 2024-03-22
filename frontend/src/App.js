@@ -18,7 +18,7 @@ function App() {
             <Route
               path="/"
               element={
-                <PrivateRoute isAuthenticated={false}>
+                <PrivateRoute>
                   <HomePage />
                 </PrivateRoute>
               }

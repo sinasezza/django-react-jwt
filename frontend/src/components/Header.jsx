@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const Header = () => {
-  let {name} = useContext(AuthContext);
-  
+  let { user } = useContext(AuthContext);
+
   return (
     <header className="bg-gray-800 py-4">
       <nav className="container mx-auto flex justify-between items-center">
@@ -17,18 +17,25 @@ const Header = () => {
             Home
           </Link>
           
-          <Link
-            to="/login/"
-            className="text-white hover:text-gray-300 font-semibold"
-          >
-            Login
-          </Link>
+          {user ? (
+            <span className="text-white hover:text-gray-300 font-semibold cursor-pointer">Logout</span>
+          ) : (
+            <Link
+              to="/login/"
+              className="text-white hover:text-gray-300 font-semibold"
+            >
+              Login
+            </Link>
+          )}
+          ;
         </div>
-        
-        <div>
-          <span className="text-white text-xl underline underline-offset-4">hello {name}</span>
-        </div>
-        
+
+        {user && (
+          <span className="text-white text-xl underline underline-offset-4">
+            hello {user.username}
+          </span>
+        )}
+
         <div>
           <Link
             to="/about/"
