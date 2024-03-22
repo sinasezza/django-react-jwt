@@ -28,7 +28,6 @@ const AuthContextProvider = ({ children }) => {
     });
   
     let data = await response.json();
-    console.log(`data is ${JSON.stringify(data)}`);
 
     if(response.status === 200) {
       setAuthToken(data);
@@ -53,7 +52,7 @@ const AuthContextProvider = ({ children }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({'refresh': authTokens.refresh})
+      body: JSON.stringify({'refresh': authTokens?.refresh})
     });
   
     let data = await response.json();
@@ -66,16 +65,25 @@ const AuthContextProvider = ({ children }) => {
     } else {
       logoutUser();
     }  
+
+    if(loading) {
+      setLoading(false);
+    }
   }
 
 
   let contextData = {
     user: user,
+    authTokens: authTokens,
     loginUser: loginUser,
     logoutUser: logoutUser,
   };
 
   useEffect(() => {
+    if(loading) {
+      updateToken();
+    }
+
     let interval = setInterval(() => {
       if(authTokens) {
         updateToken();
@@ -87,7 +95,7 @@ const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={contextData}>
-      {children}
+      {loading ? null : children}
     </AuthContext.Provider>
   );
 };
